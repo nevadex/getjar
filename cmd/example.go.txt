@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// exampleCmd represents the forge command
+// exampleCmd represents the catserver command
 var exampleCmd = &cobra.Command{
 	Use:   "example",
 	Short: "A brief description of your command",

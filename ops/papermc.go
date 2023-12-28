@@ -97,7 +97,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	log("retrieved", projectId, "build json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&buildRaw); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&buildRaw); err != nil {
 		return nil, "", err
 	}
 	downloads := buildRaw["downloads"].(map[string]interface{})

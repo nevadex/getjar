@@ -10,7 +10,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "getjar",
 	Short: "Quickly get popular minecraft server jars",
-	Long: `A tool to automatically download or compile Minecraft server jars and proxies
+	Long: `A tool to automatically download or compile Minecraft server jars
 Uses official channels from development teams to acquire files
 No middleman API is used!
 

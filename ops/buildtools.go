@@ -15,7 +15,7 @@ const (
 	BuildSpigot      = 1
 	BuildCraftBukkit = 2
 
-	BuildToolsDir = "getjar-buildtools"
+	BuildToolsDir = ".getjar-buildtools"
 	BuildToolsJar = "BuildTools.jar"
 )
 
@@ -142,10 +142,10 @@ func RunBuildTools(verbose bool, btverbose bool, buildType int, version string, 
 }
 
 func getBuildTools() error {
-	if _, er := os.Stat("getjar-buildtools"); os.IsNotExist(er) {
+	if _, er := os.Stat(BuildToolsDir); os.IsNotExist(er) {
 		log("buildtools missing, getting buildtools")
 
-		err := os.MkdirAll("getjar-buildtools", os.ModePerm)
+		err := os.MkdirAll(BuildToolsDir, os.ModePerm)
 		if err != nil {
 			return err
 		}

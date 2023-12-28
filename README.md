@@ -14,6 +14,11 @@ Why did I make this? MCJarFinder was feeling limited and it was getting annoying
 - craftbukkit (spigotmc buildtools)
 - paper (downloads api)
 - folia (downloads api)
+- 
+- 
+- catserver
+- 
+
 
 ### in development:
 
