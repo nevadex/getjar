@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"getjar/ops"
 	"os"
 
@@ -18,7 +17,8 @@ Downloads directly from PaperMC's Downloads API
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		jar, err := ops.DownloadPaperMC(VERBOSE, VERSION, ops.ProjectFolia, float64(PAPERMC_BUILD_ID), PAPERMC_EXPERIMENTAL, PAPERMC_MOJANG_MAPPINGS)
+		ops.StartLog(VERBOSE)
+		jar, fver, err := ops.DownloadPaperMC(VERSION, ops.ProjectFolia, float64(PAPERMC_BUILD_ID), PAPERMC_EXPERIMENTAL, PAPERMC_MOJANG_MAPPINGS)
 		if err != nil {
 			return err
 		}
@@ -32,7 +32,7 @@ All rights for the downloaded content belong to the appropriate persons/organiza
 		if err != nil {
 			return err
 		}
-		fmt.Println("saved folia server jar at", FILENAME)
+		ops.EndLog("saved folia", fver, "server jar at", FILENAME)
 
 		return file.Close()
 	},

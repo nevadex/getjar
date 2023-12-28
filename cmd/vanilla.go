@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"getjar/ops"
 	"os"
 
@@ -19,7 +18,8 @@ All rights for the downloaded content belong to:
 Mojang AB, Microsoft Corporation, or one of its local affiliates
 EULA: https://aka.ms/MinecraftEULA`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		jar, err := ops.DownloadVanilla(VERBOSE, VERSION)
+		ops.StartLog(VERBOSE)
+		jar, fver, err := ops.DownloadVanilla(VERSION)
 		if err != nil {
 			return err
 		}
@@ -33,7 +33,7 @@ EULA: https://aka.ms/MinecraftEULA`,
 		if err != nil {
 			return err
 		}
-		fmt.Println("saved vanilla server jar at", FILENAME)
+		ops.EndLog("saved vanilla", fver, "server jar at", FILENAME)
 
 		return file.Close()
 	},
