@@ -12,10 +12,10 @@ Why did I make this? MCJarFinder was feeling limited and it was getting annoying
 - **vanilla** (version_manifest)
 - **spigot** (spigotmc buildtools)
 - **craftbukkit** (spigotmc buildtools)
-- **paper** (downloads api)
-- **folia** (downloads api)
+- **paper** (papermc downloads api)
+- **folia** (papermc downloads api)
 - **mohist** (downloads api)
-- 
+- **fabric** (meta api)
 - **catserver** (jenkins api)
 - 
 

@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// mohistCmd represents the paper command
+// mohistCmd represents the mohist command
 var mohistCmd = &cobra.Command{
 	Use:   "mohist",
 	Short: "Download a Mohist Minecraft server jar",

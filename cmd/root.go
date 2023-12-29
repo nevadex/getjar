@@ -43,6 +43,10 @@ var (
 	PAPERMC_MOJANG_MAPPINGS bool
 
 	MOHIST_BUILD_ID int
+
+	FABRIC_FABRIC_VERSION    string
+	FABRIC_INSTALLER_VERSION string
+	FABRIC_EXPERIMENTAL      bool
 )
 
 func init() {
