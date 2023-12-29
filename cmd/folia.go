@@ -10,8 +10,8 @@ import (
 // foliaCmd represents the folia command
 var foliaCmd = &cobra.Command{
 	Use:   "folia",
-	Short: "Download a Folia Minecraft server jar",
-	Long: `Command to download a Folia Minecraft server jar
+	Short: "Download a Folia server jar",
+	Long: `Command to download a Folia minecraft server jar
 Supports only versions provided by official PaperMC channels
 Downloads directly from PaperMC's Downloads API
 

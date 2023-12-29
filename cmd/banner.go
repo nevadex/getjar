@@ -10,7 +10,7 @@ import (
 // bannerCmd represents the banner command
 var bannerCmd = &cobra.Command{
 	Use:   "banner",
-	Short: "Download a Banner Minecraft server jar",
+	Short: "Download a Banner server jar",
 	Long: `Command to download a Banner Minecraft server jar
 Supports only versions provided by official MohistMC channels
 Downloads directly from MohistMC's Downloads API

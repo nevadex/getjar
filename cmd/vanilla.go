@@ -10,8 +10,8 @@ import (
 // vanillaCmd represents the vanilla command
 var vanillaCmd = &cobra.Command{
 	Use:   "vanilla",
-	Short: "Download a Vanilla Minecraft server jar",
-	Long: `Command to download a Vanilla Minecraft server jar
+	Short: "Download a Vanilla server jar",
+	Long: `Command to download a Vanilla minecraft server jar
 Supports any Minecraft: Java Edition version
 
 All rights for the downloaded content belong to:

@@ -7,18 +7,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// mohistCmd represents the mohist command
-var mohistCmd = &cobra.Command{
-	Use:   "mohist",
-	Short: "Download a Mohist server jar",
-	Long: `Command to download a Mohist minecraft server jar
-Supports only versions provided by official MohistMC channels
-Downloads directly from MohistMC's Downloads API
+// purpurCmd represents the purpur command
+var purpurCmd = &cobra.Command{
+	Use:   "purpur",
+	Short: "Download a Purpur server jar",
+	Long: `Command to download a Purpur minecraft server jar
+Supports only versions provided by official PurpurMC channels
+Downloads directly from PurpurMC's Downloads API
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ops.StartLog(VERBOSE)
-		jar, fver, err := ops.DownloadMohistMC(VERSION, ops.ProjectMohist, float64(MOHISTMC_BUILD_ID))
+		jar, fver, err := ops.DownloadPurpurMC(VERSION, PURPURMC_BUILD_ID)
 		if err != nil {
 			return err
 		}
@@ -32,14 +32,14 @@ All rights for the downloaded content belong to the appropriate persons/organiza
 		if err != nil {
 			return err
 		}
-		ops.EndLog("saved mohist", fver, "server jar at", FILENAME)
+		ops.EndLog("saved purpur", fver, "server jar at", FILENAME)
 
 		return file.Close()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(mohistCmd)
+	rootCmd.AddCommand(purpurCmd)
 
 	// Here you will define your flags and configuration settings.
 
@@ -50,5 +50,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// paperCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	mohistCmd.Flags().IntVarP(&MOHISTMC_BUILD_ID, "build-id", "b", 0, "Supply a specific build id instead of using the latest build")
+	purpurCmd.Flags().StringVarP(&PURPURMC_BUILD_ID, "build-id", "b", "latest", "Supply a specific build id instead of using the latest build")
 }

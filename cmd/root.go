@@ -47,6 +47,8 @@ var (
 	FABRIC_FABRIC_VERSION    string
 	FABRIC_INSTALLER_VERSION string
 	FABRIC_EXPERIMENTAL      bool
+
+	PURPURMC_BUILD_ID string
 )
 
 func init() {

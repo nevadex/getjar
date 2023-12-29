@@ -18,19 +18,17 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 - **banner** (mohistmc downloads api)
 - **fabric** (meta api)
 - **catserver** (jenkins api)
-- 
+- **purpur** (downloads api)
 
 
 ### in development:
 
-- mohist (downloads api)
-- fabric (downloads api)
-- catserver (website hotlinks cuz only 3 versions lol)
-- purpur (downloads api)
 - also going to make this work as a library available as "github.com/nevadex/getjar/lib"
+- supported version list for all types (option to pipe into less, will also optionally print build ids, internal versions, etc)
+- send any other wanted server types as an issue on this repo
 
 award-winner for the shiddiest download platform:  
-forge - adfocus links, hate it and plus the maven is locked
+forge - adfocus links, hate it and plus the maven is locked. will not support ever
 
 > jar options are based on what is available on serverjars.com but getjar is designed to operate without a middleman website or api, unlike serverjars.com
 

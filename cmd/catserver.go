@@ -10,8 +10,8 @@ import (
 // catserverCmd represents the catserver command
 var catserverCmd = &cobra.Command{
 	Use:   "catserver",
-	Short: "Download a Catserver Minecraft server jar",
-	Long: `Command to download a Catserver Minecraft server jar
+	Short: "Download a Catserver server jar",
+	Long: `Command to download a Catserver minecraft server jar
 Supports only versions provided by official Catserver channels
 Downloads directly from Catserver Jenkins
 

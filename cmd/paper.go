@@ -10,8 +10,8 @@ import (
 // paperCmd represents the paper command
 var paperCmd = &cobra.Command{
 	Use:   "paper",
-	Short: "Download a Paper Minecraft server jar",
-	Long: `Command to download a Paper Minecraft server jar
+	Short: "Download a Paper server jar",
+	Long: `Command to download a Paper minecraft server jar
 Supports only versions provided by official PaperMC channels
 Downloads directly from PaperMC's Downloads API
 

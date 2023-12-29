@@ -10,8 +10,8 @@ import (
 // fabricCmd represents the fabric command
 var fabricCmd = &cobra.Command{
 	Use:   "fabric",
-	Short: "Download a Fabric Minecraft server jar",
-	Long: `Command to download a Fabric Minecraft server jar
+	Short: "Download a Fabric server jar",
+	Long: `Command to download a Fabric minecraft server jar
 Supports only versions provided by official FabricMC channels
 Downloads directly from FabricMC's Meta API
 
