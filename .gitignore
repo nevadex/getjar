@@ -1,3 +1,8 @@
 /getjar-buildtools
 *.jar
 /.getjar-buildtools/
+getjar_amd64
+getjar_amd64.exe
+getjar_arm64
+getjar_darwin
+getjar

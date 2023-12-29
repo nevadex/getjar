@@ -2,9 +2,7 @@ package ops
 
 import (
 	"fmt"
-	"golang.org/x/crypto/ssh/terminal"
 	"regexp"
-	"syscall"
 	"time"
 )
 
@@ -58,9 +56,10 @@ func slog(things ...any) {
 
 func AsyncSpinner() chan string {
 	ch := make(chan string)
-	if !terminal.IsTerminal(syscall.Stdout) {
-		close(ch)
-	}
+	// because for some fucking reason syscall.Stdout is a different type on windows and idgaf to fix it
+	//if !terminal.IsTerminal(syscall.Stdout) {
+	//	close(ch)
+	//}
 
 	go func() {
 		chars := []string{"|", "/", "-", "\\"}
