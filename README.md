@@ -7,6 +7,16 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 
 ---
 
+## features:
+
+- download server jars directly
+- download supported version lists directly
+- select specific builds/internal versions
+- access a wide range of popular server options
+- available as a library for other applications (github.com/nevadex/getjar/getjarlib)
+
+---
+
 ## currently supported:
 
 - **vanilla** (version_manifest)
@@ -23,9 +33,7 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 
 ### in development:
 
-- also going to make this work as a library available as "github.com/nevadex/getjar/lib"
-- supported version list for all types (option to pipe into less, will also optionally print build ids, internal versions, etc)
-- send any other wanted server types as an issue on this repo
+- send any other wanted server types as an issue on this repo (or write it yourself and make a pull request)
 
 award-winner for the shiddiest download platform:  
 forge - adfocus links, hate it and plus the maven is locked. will not support ever
@@ -36,5 +44,4 @@ forge - adfocus links, hate it and plus the maven is locked. will not support ev
 
 ## limitations:
 
-- any type of jar without an indexable source (a list of versions or a list of the latest versions in all channels) will probably not make it into this unless someone makes a pull request (soup ftw)
-- ~~no version lists (inconsistency between minecraft version and project version, some don't have lists, etc)~~ actually might work, buildtools can scrape a web directory of ver.json files at https://hub.spigotmc.org/versions/
+- any type of jar without an indexable source (a list of versions or a list of the latest versions in all channels) will probably not make it into this
