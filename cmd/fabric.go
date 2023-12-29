@@ -32,7 +32,7 @@ All rights for the downloaded content belong to the appropriate persons/organiza
 		if err != nil {
 			return err
 		}
-		ops.EndLog("saved paper", fver, "server jar at", FILENAME)
+		ops.EndLog("saved fabric", fver, "server jar at", FILENAME)
 
 		return file.Close()
 	},

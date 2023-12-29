@@ -3,7 +3,7 @@
 
 ---
 
-Why did I make this? MCJarFinder was feeling limited and it was getting annoying having to figure out how to wget my way into downloading all the jars and which websites have adwalls so this is now a thing
+why did I make this? mcjarfinder was feeling limited and it was getting annoying having to figure out how to wget my way into downloading all the jars and which websites have adwalls so this is now a thing
 
 ---
 
@@ -14,7 +14,8 @@ Why did I make this? MCJarFinder was feeling limited and it was getting annoying
 - **craftbukkit** (spigotmc buildtools)
 - **paper** (papermc downloads api)
 - **folia** (papermc downloads api)
-- **mohist** (downloads api)
+- **mohist** (mohistmc downloads api)
+- **banner** (mohistmc downloads api)
 - **fabric** (meta api)
 - **catserver** (jenkins api)
 - 
@@ -38,4 +39,4 @@ forge - adfocus links, hate it and plus the maven is locked
 ## limitations:
 
 - any type of jar without an indexable source (a list of versions or a list of the latest versions in all channels) will probably not make it into this unless someone makes a pull request (soup ftw)
-- no version lists (inconsistency between minecraft version and project version, some don't have lists, etc) (actually might happen)
+- ~~no version lists (inconsistency between minecraft version and project version, some don't have lists, etc)~~ actually might work, buildtools can scrape a web directory of ver.json files at https://hub.spigotmc.org/versions/

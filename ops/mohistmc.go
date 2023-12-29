@@ -8,12 +8,17 @@ import (
 	"strconv"
 )
 
-func DownloadMohist(version string, buildId float64) ([]byte, string, error) {
-	log("attempting to download", version, "using mohist api")
+const (
+	ProjectMohist = "mohist"
+	ProjectBanner = "banner"
+)
+
+func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte, string, error) {
+	log("attempting to download", version, "using mohistmc api")
 
 	slog("downloading version list")
 	var versionListRaw map[string]interface{}
-	resp, err := http.Get("https://mohistmc.com/api/v2/projects/mohist/")
+	resp, err := http.Get("https://mohistmc.com/api/v2/projects/" + projectId)
 	if err != nil {
 		return nil, "", err
 	}
@@ -45,7 +50,7 @@ func DownloadMohist(version string, buildId float64) ([]byte, string, error) {
 
 	slog("downloading build list")
 	var buildListRaw map[string]interface{}
-	resp, err = http.Get("https://mohistmc.com/api/v2/projects/mohist/" + version + "/builds/")
+	resp, err = http.Get("https://mohistmc.com/api/v2/projects/" + projectId + "/" + version + "/builds/")
 	if err != nil {
 		return nil, "", err
 	}
@@ -67,7 +72,7 @@ func DownloadMohist(version string, buildId float64) ([]byte, string, error) {
 
 	slog("downloading build", buildId)
 	var buildRaw map[string]interface{}
-	resp, err = http.Get("https://mohistmc.com/api/v2/projects/mohist/" + version + "/builds/" + strconv.FormatFloat(buildId, 'f', -1, 64))
+	resp, err = http.Get("https://mohistmc.com/api/v2/projects/" + projectId + "/" + version + "/builds/" + strconv.FormatFloat(buildId, 'f', -1, 64))
 	if err != nil {
 		return nil, "", err
 	}
