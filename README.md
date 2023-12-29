@@ -38,4 +38,4 @@ forge - adfocus links, hate it and plus the maven is locked
 ## limitations:
 
 - any type of jar without an indexable source (a list of versions or a list of the latest versions in all channels) will probably not make it into this unless someone makes a pull request (soup ftw)
-- no version lists (inconsistency between minecraft version and project version, some don't have lists, etc)
+- no version lists (inconsistency between minecraft version and project version, some don't have lists, etc) (actually might happen)
