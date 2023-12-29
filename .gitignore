@@ -1,2 +1,3 @@
 /getjar-buildtools
 *.jar
+/.getjar-buildtools/

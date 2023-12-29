@@ -41,6 +41,8 @@ var (
 	PAPERMC_BUILD_ID        int
 	PAPERMC_EXPERIMENTAL    bool
 	PAPERMC_MOJANG_MAPPINGS bool
+
+	MOHIST_BUILD_ID int
 )
 
 func init() {

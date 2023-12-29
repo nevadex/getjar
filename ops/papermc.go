@@ -31,7 +31,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	versionList := versionListRaw["versions"].([]interface{})
 	log("decoded version list json")
 
-	if version == "" || version == "latest" {
+	if version == "latest" {
 		version = versionList[len(versionList)-1].(string)
 		log("no version supplied, defaulting to latest available version:", version)
 	} else {
@@ -54,7 +54,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	if err != nil {
 		return nil, "", err
 	}
-	log("retrieved", projectId, "build list json")
+	log("retrieved", version, "build list json")
 	defer func() { _ = resp.Body.Close() }()
 
 	if er := json.NewDecoder(resp.Body).Decode(&buildListRaw); er != nil {
@@ -94,7 +94,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	if err != nil {
 		return nil, "", err
 	}
-	log("retrieved", projectId, "build json")
+	log("retrieved build", buildId, "json")
 	defer func() { _ = resp.Body.Close() }()
 
 	if err = json.NewDecoder(resp.Body).Decode(&buildRaw); err != nil {
