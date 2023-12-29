@@ -7,6 +7,12 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 
 ---
 
+## install:
+
+`go install github.com/nevadex/getjar@latest`
+
+---
+
 ## features:
 
 - download server jars directly
