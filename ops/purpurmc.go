@@ -19,7 +19,7 @@ func DownloadPurpurMC(version string, buildId string) ([]byte, string, error) {
 	log("retrieved version list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&versionListRaw); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&versionListRaw); err != nil {
 		return nil, "", err
 	}
 	versionList := versionListRaw["versions"].([]interface{})
@@ -51,7 +51,7 @@ func DownloadPurpurMC(version string, buildId string) ([]byte, string, error) {
 	log("retrieved", version, "build list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&buildList); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&buildList); err != nil {
 		return nil, "", err
 	}
 	log("decoded build list json")
@@ -91,4 +91,24 @@ func DownloadPurpurMC(version string, buildId string) ([]byte, string, error) {
 	log("md5 checksum:", jarMd5)
 
 	return jar, version, nil
+}
+
+func GetVersionListPurpurMC() ([]string, error) {
+	var versionListRaw map[string]interface{}
+	resp, err := http.Get("https://api.purpurmc.org/v2/purpur/")
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if err = json.NewDecoder(resp.Body).Decode(&versionListRaw); err != nil {
+		return nil, err
+	}
+	versionList := versionListRaw["versions"].([]interface{})
+
+	var list []string
+	for i := range versionList {
+		list = append(list, versionList[i].(string))
+	}
+	return list, nil
 }

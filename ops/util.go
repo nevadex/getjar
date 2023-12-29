@@ -3,16 +3,21 @@ package ops
 import (
 	"fmt"
 	"golang.org/x/crypto/ssh/terminal"
+	"regexp"
 	"syscall"
 	"time"
 )
 
 var (
-	ch chan string
-	vb bool
+	ch      chan string
+	vb      bool
+	logging bool
+
+	versionRegex = regexp.MustCompile(`1\.\d+-pre\d+|1\.\d+\.\d+-pre\d+|1\.\d+-rc\d+|1\.\d+\.\d+-rc\d+|1\.\d+.\d+|1\.\d+`)
 )
 
 func StartLog(verbose bool) {
+	logging = true
 	vb = verbose
 	if !vb {
 		ch = AsyncSpinner()
@@ -31,12 +36,18 @@ func EndLog(things ...any) {
 }
 
 func log(things ...any) {
+	if !logging {
+		return
+	}
 	if vb {
 		fmt.Println(things...)
 	}
 }
 
 func slog(things ...any) {
+	if !logging {
+		return
+	}
 	if !vb {
 		str := fmt.Sprintln(things...)
 		ch <- str[:len(str)-1]

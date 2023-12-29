@@ -103,3 +103,23 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 
 	return jar, version, nil
 }
+
+func GetVersionListMohistMC(projectId string) ([]string, error) {
+	var raw map[string]interface{}
+	resp, err := http.Get("https://mohistmc.com/api/v2/projects/" + projectId)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if err = json.NewDecoder(resp.Body).Decode(&raw); err != nil {
+		return nil, err
+	}
+	versionList := raw["versions"].([]interface{})
+	var list []string
+	for i := range versionList {
+		list = append(list, versionList[i].(string))
+	}
+
+	return list, nil
+}

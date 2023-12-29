@@ -183,3 +183,28 @@ func getBuildTools() error {
 	}
 	return nil
 }
+
+func GetVersionListBuildTools() ([]string, error) {
+	resp, err := http.Get("https://hub.spigotmc.org/versions/")
+	if err != nil {
+		return nil, err
+	}
+	html, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	upper := versionRegex.FindAllStringSubmatch(string(html), -1)
+
+	noDupes := make(map[string]bool)
+	for i := range upper {
+		noDupes[upper[i][0]] = true
+	}
+
+	var lower []string
+	for k := range noDupes {
+		lower = append(lower, k)
+	}
+
+	return lower, nil
+}

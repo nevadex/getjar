@@ -84,3 +84,24 @@ func DownloadVanilla(version string) ([]byte, string, error) {
 
 	return jar, version, nil
 }
+
+func GetVersionListVanilla() ([]string, error) {
+	var versionManifest map[string]interface{}
+	resp, err := http.Get("https://launchermeta.mojang.com/mc/game/version_manifest.json")
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	err = json.NewDecoder(resp.Body).Decode(&versionManifest)
+	if err != nil {
+		return nil, err
+	}
+	versionList := versionManifest["versions"].([]interface{})
+
+	var list []string
+	for i := range versionList {
+		list = append(list, versionList[i].(map[string]interface{})["id"].(string))
+	}
+	return list, nil
+}

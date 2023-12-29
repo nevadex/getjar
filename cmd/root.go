@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+	"getjar/ops"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -18,6 +20,56 @@ https://github.com/nevadex/getjar/`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		if LIST_VERSIONS {
+			var versionList []string
+			var err error
+
+			ops.StartLog(VERBOSE)
+			switch cmd {
+			case bannerCmd:
+				versionList, err = ops.GetVersionListMohistMC(ops.ProjectBanner)
+			case bukkitCmd:
+				versionList, err = ops.GetVersionListBuildTools()
+			case catserverCmd:
+				versionList, err = ops.GetVersionListCatserver()
+			case fabricCmd:
+				versionList, err = ops.GetVersionListFabricMC()
+			case foliaCmd:
+				versionList, err = ops.GetVersionListPaperMC(ops.ProjectFolia)
+			case mohistCmd:
+				versionList, err = ops.GetVersionListMohistMC(ops.ProjectMohist)
+			case paperCmd:
+				versionList, err = ops.GetVersionListPaperMC(ops.ProjectPaper)
+			case purpurCmd:
+				versionList, err = ops.GetVersionListPurpurMC()
+			case spigotCmd:
+				versionList, err = ops.GetVersionListBuildTools()
+			case vanillaCmd:
+				versionList, err = ops.GetVersionListVanilla()
+			}
+
+			if FILENAME == "server.jar" {
+				ops.EndLog("downloaded version list")
+
+				for i := range versionList {
+					fmt.Println(versionList[i])
+				}
+			} else {
+				var str string
+				for i := range versionList {
+					str += fmt.Sprintln(versionList[i])
+				}
+
+				err = os.WriteFile(FILENAME, []byte(str), os.ModePerm)
+				ops.EndLog("saved version list to", FILENAME)
+			}
+
+			os.Exit(0)
+			return err
+		}
+		return nil
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -33,7 +85,8 @@ var (
 	VERSION  string
 	FILENAME string
 
-	VERBOSE bool
+	VERBOSE       bool
+	LIST_VERSIONS bool
 
 	BUILDTOOLS_VERBOSE      bool
 	BUILDTOOLS_EXPERIMENTAL bool
@@ -66,4 +119,5 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&FILENAME, "filename", "f", "server.jar", "The name of the jarfile to write")
 
 	rootCmd.PersistentFlags().BoolVarP(&VERBOSE, "verbose", "p", false, "Output as much detail as possible")
+	rootCmd.PersistentFlags().BoolVarP(&LIST_VERSIONS, "list", "l", false, "Output a list of minecraft versions supported by a server")
 }

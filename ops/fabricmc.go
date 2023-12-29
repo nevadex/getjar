@@ -19,7 +19,7 @@ func DownloadFabricMC(version string, fabricVersion string, installerVersion str
 	log("retrieved version list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&versionList); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&versionList); err != nil {
 		return nil, "", err
 	}
 	log("decoded version list json")
@@ -55,7 +55,7 @@ func DownloadFabricMC(version string, fabricVersion string, installerVersion str
 	log("retrieved installer version list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&installerVersionList); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&installerVersionList); err != nil {
 		return nil, "", err
 	}
 	log("decoded installer version list json")
@@ -91,7 +91,7 @@ func DownloadFabricMC(version string, fabricVersion string, installerVersion str
 	log("retrieved fabric version list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&fabricVersionList); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&fabricVersionList); err != nil {
 		return nil, "", err
 	}
 	log("decoded fabric version list json")
@@ -132,4 +132,25 @@ func DownloadFabricMC(version string, fabricVersion string, installerVersion str
 	jar, err := io.ReadAll(resp.Body)
 
 	return jar, version, nil
+}
+
+func GetVersionListFabricMC() ([]string, error) {
+	var versionList []interface{}
+	resp, err := http.Get("https://meta.fabricmc.net/v2/versions/game")
+	if err != nil {
+		return nil, err
+	}
+	log("retrieved version list json")
+	defer func() { _ = resp.Body.Close() }()
+
+	if err = json.NewDecoder(resp.Body).Decode(&versionList); err != nil {
+		return nil, err
+	}
+
+	var list []string
+	for i := range versionList {
+		list = append(list, versionList[i].(map[string]interface{})["version"].(string))
+	}
+
+	return list, nil
 }

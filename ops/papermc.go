@@ -25,7 +25,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	log("retrieved", projectId, "version list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&versionListRaw); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&versionListRaw); err != nil {
 		return nil, "", err
 	}
 	versionList := versionListRaw["versions"].([]interface{})
@@ -57,7 +57,7 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	log("retrieved", version, "build list json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&buildListRaw); er != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&buildListRaw); err != nil {
 		return nil, "", err
 	}
 	buildList := buildListRaw["builds"].([]interface{})
@@ -126,4 +126,26 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 	log("sha256 checksum:", jarSha256)
 
 	return jar, version, nil
+}
+
+func GetVersionListPaperMC(projectId string) ([]string, error) {
+	var versionListRaw map[string]interface{}
+	resp, err := http.Get("https://api.papermc.io/v2/projects/" + projectId)
+	if err != nil {
+		return nil, err
+	}
+	log("retrieved", projectId, "version list json")
+	defer func() { _ = resp.Body.Close() }()
+
+	if err = json.NewDecoder(resp.Body).Decode(&versionListRaw); err != nil {
+		return nil, err
+	}
+	versionList := versionListRaw["versions"].([]interface{})
+	log("decoded version list json")
+
+	var list []string
+	for i := range versionList {
+		list = append(list, versionList[i].(string))
+	}
+	return list, nil
 }

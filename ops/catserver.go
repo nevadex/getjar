@@ -23,8 +23,8 @@ func DownloadCatserver(version string) ([]byte, string, error) {
 	log("retrieved build json")
 	defer func() { _ = resp.Body.Close() }()
 
-	if er := json.NewDecoder(resp.Body).Decode(&buildRaw); er != nil {
-		return nil, "", er
+	if err = json.NewDecoder(resp.Body).Decode(&buildRaw); err != nil {
+		return nil, "", err
 	}
 	artifacts := buildRaw["artifacts"].([]interface{})
 	jarPath := artifacts[0].(map[string]interface{})["relativePath"].(string)
@@ -40,4 +40,25 @@ func DownloadCatserver(version string) ([]byte, string, error) {
 	log("downloaded jar")
 
 	return jar, version, err
+}
+
+func GetVersionListCatserver() ([]string, error) {
+	var jobsRaw map[string]interface{}
+	resp, err := http.Get("https://jenkins.rbqcloud.cn:30011/api/json/")
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if er := json.NewDecoder(resp.Body).Decode(&jobsRaw); er != nil {
+		return nil, er
+	}
+	jobs := jobsRaw["jobs"].([]interface{})
+
+	var list []string
+	for i := range jobs {
+		list = append(list, versionRegex.FindStringSubmatch(jobs[i].(map[string]interface{})["name"].(string))[0])
+	}
+
+	return list, nil
 }
