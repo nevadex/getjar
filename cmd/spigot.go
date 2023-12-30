@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"getjar/ops"
+	"github.com/nevadex/getjar/ops"
 
 	"github.com/spf13/cobra"
 )

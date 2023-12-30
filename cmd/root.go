@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"getjar/ops"
+	"github.com/nevadex/getjar/ops"
 	"os"
 
 	"github.com/spf13/cobra"

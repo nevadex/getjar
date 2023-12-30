@@ -1,7 +1,7 @@
 package getjarlib
 
 import (
-	"getjar/ops"
+	"github.com/nevadex/getjar/ops"
 	"os"
 )
 

@@ -1,6 +1,6 @@
 package main
 
-import "getjar/cmd"
+import "github.com/nevadex/getjar/cmd"
 
 func main() {
 	cmd.Execute()
