@@ -9,7 +9,9 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 
 ## install:
 
-`go install github.com/nevadex/getjar@latest`
+if go is installed: `go install github.com/nevadex/getjar@latest`
+
+if not: download binaries from the "Releases" page
 
 ---
 
