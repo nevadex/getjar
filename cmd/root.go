@@ -21,6 +21,10 @@ https://github.com/nevadex/getjar/`,
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		if QUIET {
+			os.Stdout = nil
+		}
+
 		if LIST_VERSIONS {
 			var versionList []string
 			var err error
@@ -86,6 +90,7 @@ var (
 	FILENAME string
 
 	VERBOSE       bool
+	QUIET         bool
 	LIST_VERSIONS bool
 
 	BUILDTOOLS_VERBOSE      bool
@@ -120,4 +125,5 @@ func init() {
 
 	rootCmd.PersistentFlags().BoolVarP(&VERBOSE, "verbose", "p", false, "Output as much detail as possible")
 	rootCmd.PersistentFlags().BoolVarP(&LIST_VERSIONS, "list", "l", false, "Output a list of minecraft versions supported by a server")
+	rootCmd.PersistentFlags().BoolVarP(&QUIET, "quiet", "q", false, "Output nothing to stdout (sets stdout to nil)")
 }
