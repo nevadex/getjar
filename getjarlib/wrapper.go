@@ -6,16 +6,17 @@ import (
 )
 
 const (
-	BANNER    = 1
-	BUKKIT    = 2
-	CATSERVER = 3
-	FABRIC    = 4
-	FOLIA     = 5
-	MOHIST    = 6
-	PAPER     = 7
-	PURPUR    = 8
-	SPIGOT    = 9
-	VANILLA   = 10
+	BANNER    = 8
+	BUKKIT    = 5
+	CATSERVER = 6
+	FABRIC    = 9
+	FOLIA     = 3
+	FORGE     = 11
+	MOHIST    = 7
+	PAPER     = 2
+	PURPUR    = 10
+	SPIGOT    = 4
+	VANILLA   = 1
 )
 
 //goland:noinspection GoUnusedExportedFunction
@@ -37,6 +38,8 @@ func ServerJar(version string, filename string, serverType int) error {
 			jar, _, err = ops.DownloadFabricMC(version, "latest", "latest", false)
 		case FOLIA:
 			jar, _, err = ops.DownloadPaperMC(version, ops.ProjectFolia, 0, false, false)
+		case FORGE:
+			jar, _, err = ops.DownloadMinecraftForge(version, "latest", false)
 		case MOHIST:
 			jar, _, err = ops.DownloadMohistMC(version, ops.ProjectMohist, 0)
 		case PAPER:
