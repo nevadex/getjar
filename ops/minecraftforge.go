@@ -80,9 +80,12 @@ func DownloadMinecraftForge(version string, forgeVersion string, experimental bo
 
 	elems = doc.FindAll("div", "class", "info-tooltip")
 	var jarSha1, jarUrl string
-	//goland:noinspection GoUnreachableCode
-	for i := 1; i < len(elems)-2; i += 3 {
+	for i := range elems {
 		e := elems[i]
+		if !strings.Contains(e.HTML(), "installer.jar") {
+			continue
+		}
+
 		sha1 := strings.Trim(e.Children()[6].HTML(), " \n")
 		url := e.Children()[8].Attrs()["href"]
 
