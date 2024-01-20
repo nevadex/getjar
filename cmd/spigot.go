@@ -16,7 +16,7 @@ Supports only versions provided by official SpigotMC channels
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		fver, err := ops.RunBuildTools(VERBOSE, BUILDTOOLS_VERBOSE, ops.BuildSpigot, VERSION, FILENAME, BUILDTOOLS_EXPERIMENTAL)
 		if err != nil {
 			return err

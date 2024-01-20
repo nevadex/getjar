@@ -17,7 +17,7 @@ Downloads directly from FabricMC's Meta API
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		jar, fver, err := ops.DownloadFabricMC(VERSION, FABRIC_FABRIC_VERSION, FABRIC_INSTALLER_VERSION, FABRIC_EXPERIMENTAL)
 		if err != nil {
 			return err

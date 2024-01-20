@@ -17,7 +17,7 @@ Downloads directly from PaperMC's Downloads API
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		jar, fver, err := ops.DownloadPaperMC(VERSION, ops.ProjectPaper, float64(PAPERMC_BUILD_ID), PAPERMC_EXPERIMENTAL, PAPERMC_MOJANG_MAPPINGS)
 		if err != nil {
 			return err

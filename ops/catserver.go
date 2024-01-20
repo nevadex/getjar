@@ -39,6 +39,10 @@ func DownloadCatserver(version string) ([]byte, string, error) {
 	jar, err := io.ReadAll(resp.Body)
 	log("downloaded jar")
 
+	if printChecksum {
+		post("no checksum provided")
+	}
+
 	return jar, version, err
 }
 

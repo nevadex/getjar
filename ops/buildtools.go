@@ -138,6 +138,10 @@ func RunBuildTools(verbose bool, btverbose bool, buildType int, version string, 
 	err = os.WriteFile(filename, bytes, os.ModePerm)
 	log("moved file and renamed")
 
+	if printChecksum {
+		post("no checksum provided")
+	}
+
 	return version, nil
 }
 

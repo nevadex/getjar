@@ -17,7 +17,7 @@ Downloads directly from MohistMC's Downloads API
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		jar, fver, err := ops.DownloadMohistMC(VERSION, ops.ProjectBanner, float64(MOHISTMC_BUILD_ID))
 		if err != nil {
 			return err

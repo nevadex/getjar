@@ -60,7 +60,11 @@ func DownloadVanilla(version string) ([]byte, string, error) {
 	if err != nil {
 		return nil, "", err
 	}
-	jarurl := versionJson["downloads"].(map[string]interface{})["server"].(map[string]interface{})["url"].(string)
+	serverDownloadsSection := versionJson["downloads"].(map[string]interface{})["server"]
+	if serverDownloadsSection == nil {
+		return nil, "", errors.New("provided version does not have a server jar")
+	}
+	jarurl := serverDownloadsSection.(map[string]interface{})["url"].(string)
 	//jarsize := strconv.FormatFloat(versionJson["downloads"].(map[string]interface{})["server"].(map[string]interface{})["size"].(float64), 'f', -1, 64)
 	jarsha1 := versionJson["downloads"].(map[string]interface{})["server"].(map[string]interface{})["sha1"].(string)
 	//jarversiontype := versionJson["type"].(string)
@@ -80,7 +84,9 @@ func DownloadVanilla(version string) ([]byte, string, error) {
 	//log("minecraft version type:", jarversiontype)
 	//log("minecraft version number:", version)
 	//log("minimum java version:", jarjavaversion)
-	log("sha1 checksum:", jarsha1)
+	if printChecksum {
+		post("sha1 checksum:", jarsha1)
+	}
 
 	return jar, version, nil
 }

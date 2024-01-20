@@ -18,7 +18,7 @@ All rights for the downloaded content belong to:
 Mojang AB, Microsoft Corporation, or one of its local affiliates
 EULA: https://aka.ms/MinecraftEULA`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		jar, fver, err := ops.DownloadVanilla(VERSION)
 		if err != nil {
 			return err

@@ -17,7 +17,7 @@ Downloads directly from MinecraftForge Maven
 
 All rights for the downloaded content belong to the appropriate persons/organizations`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		ops.StartLog(VERBOSE)
+		ops.StartLog(VERBOSE, CHECKSUM)
 		jar, fver, err := ops.DownloadMinecraftForge(VERSION, FORGE_FORGE_VERSION, FORGE_EXPERIMENTAL)
 		if err != nil {
 			return err

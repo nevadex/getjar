@@ -88,7 +88,9 @@ func DownloadPurpurMC(version string, buildId string) ([]byte, string, error) {
 
 	//log("jarfile size:", len(jar))
 	//log("minecraft version number:", version)
-	log("md5 checksum:", jarMd5)
+	if printChecksum {
+		post("md5 checksum:", jarMd5)
+	}
 
 	return jar, version, nil
 }

@@ -120,9 +120,11 @@ func DownloadMinecraftForge(version string, forgeVersion string, experimental bo
 
 	//log("jarfile size:", len(jar))
 	//log("minecraft version number:", version)
-	log("sha1 checksum:", jarSha1)
+	if printChecksum {
+		post("sha1 checksum:", jarSha1)
+	}
 
-	post("** the jar is an installer, not a server jar!")
+	post("the jar is an installer, not a server jar!")
 
 	return jar, version, nil
 }
@@ -142,7 +144,7 @@ func GetVersionListMinecraftForge() ([]string, error) {
 			versions = append(versions, versionRegex.FindStringSubmatch(href)[0])
 		}
 	}
-	versions = append(versions, doc.Find("li", "class", "elem-active").Text())
+	versions = append([]string{doc.Find("li", "class", "elem-active").Text()}, versions...)
 
 	return versions, nil
 }

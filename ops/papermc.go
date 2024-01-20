@@ -123,7 +123,9 @@ func DownloadPaperMC(version string, projectId string, buildId float64, experime
 
 	//log("jarfile size:", len(jar))
 	//log("minecraft version number:", version)
-	log("sha256 checksum:", jarSha256)
+	if printChecksum {
+		post("sha256 checksum:", jarSha256)
+	}
 
 	return jar, version, nil
 }

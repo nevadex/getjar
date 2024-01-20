@@ -99,7 +99,9 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 
 	//log("jarfile size:", len(jar))
 	//log("minecraft version number:", version)
-	log("md5 checksum:", jarMd5)
+	if printChecksum {
+		post("md5 checksum:", jarMd5)
+	}
 
 	return jar, version, nil
 }

@@ -29,7 +29,7 @@ https://github.com/nevadex/getjar/`,
 			var versionList []string
 			var err error
 
-			ops.StartLog(VERBOSE)
+			ops.StartLog(VERBOSE, false)
 			switch cmd {
 			case bannerCmd:
 				versionList, err = ops.GetVersionListMohistMC(ops.ProjectBanner)
@@ -96,6 +96,7 @@ var (
 	VERBOSE       bool
 	QUIET         bool
 	LIST_VERSIONS bool
+	CHECKSUM      bool
 
 	BUILDTOOLS_VERBOSE      bool
 	BUILDTOOLS_EXPERIMENTAL bool
@@ -133,4 +134,5 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&VERBOSE, "verbose", "p", false, "Output as much detail as possible")
 	rootCmd.PersistentFlags().BoolVarP(&LIST_VERSIONS, "list", "l", false, "Output a list of minecraft versions supported by a server")
 	rootCmd.PersistentFlags().BoolVarP(&QUIET, "quiet", "q", false, "Output nothing to stdout (sets stdout to nil)")
+	rootCmd.PersistentFlags().BoolVarP(&CHECKSUM, "checksum", "c", false, "Output the jar checksum if available")
 }

@@ -126,10 +126,13 @@ func DownloadFabricMC(version string, fabricVersion string, installerVersion str
 	if err != nil {
 		return nil, "", err
 	}
-	log("downloaded server jar")
 	defer func() { _ = resp.Body.Close() }()
-
 	jar, err := io.ReadAll(resp.Body)
+	log("downloaded server jar")
+
+	if printChecksum {
+		post("no checksum provided")
+	}
 
 	return jar, version, nil
 }
