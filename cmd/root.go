@@ -41,6 +41,8 @@ https://github.com/nevadex/getjar/`,
 				versionList, err = ops.GetVersionListFabricMC()
 			case foliaCmd:
 				versionList, err = ops.GetVersionListPaperMC(ops.ProjectFolia)
+			case forgeCmd:
+				versionList, err = ops.GetVersionListMinecraftForge()
 			case mohistCmd:
 				versionList, err = ops.GetVersionListMohistMC(ops.ProjectMohist)
 			case paperCmd:
@@ -59,6 +61,8 @@ https://github.com/nevadex/getjar/`,
 				for i := range versionList {
 					fmt.Println(versionList[i])
 				}
+
+				fmt.Println("(total", len(versionList), "versions)")
 			} else {
 				var str string
 				for i := range versionList {
@@ -107,6 +111,9 @@ var (
 	FABRIC_EXPERIMENTAL      bool
 
 	PURPURMC_BUILD_ID string
+
+	FORGE_FORGE_VERSION string
+	FORGE_EXPERIMENTAL  bool
 )
 
 func init() {

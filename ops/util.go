@@ -7,11 +7,12 @@ import (
 )
 
 var (
-	ch      chan string
-	vb      bool
-	logging bool
+	ch       chan string
+	vb       bool
+	logging  bool
+	postLogs []string
 
-	versionRegex = regexp.MustCompile(`1\.\d+-pre\d+|1\.\d+\.\d+-pre\d+|1\.\d+-rc\d+|1\.\d+\.\d+-rc\d+|1\.\d+.\d+|1\.\d+`)
+	versionRegex = regexp.MustCompile(`1\.\d+-pre\d+|1\.\d+\.\d+[-_]pre\d+|1\.\d+-rc\d+|1\.\d+\.\d+-rc\d+|1\.\d+.\d+|1\.\d+`)
 )
 
 func StartLog(verbose bool) {
@@ -30,6 +31,10 @@ func EndLog(things ...any) {
 		time.Sleep(time.Millisecond)
 	} else {
 		fmt.Println(things...)
+	}
+
+	for i := range postLogs {
+		fmt.Println(postLogs[i])
 	}
 }
 
@@ -52,6 +57,13 @@ func slog(things ...any) {
 	} else {
 		fmt.Println(things...)
 	}
+}
+
+func post(s string) {
+	if !logging {
+		return
+	}
+	postLogs = append(postLogs, s)
 }
 
 func AsyncSpinner() chan string {

@@ -37,14 +37,20 @@ if not: download binaries from the "Releases" page
 - **fabric** (meta api)
 - **catserver** (jenkins api)
 - **purpur** (downloads api)
+- **forge** (html parsing)
 
 
 ### in development:
 
+- neoforge (maven api)
+- magma (magmafoundation downloads api)
+- sponge (spongepowered downloads api)
+- limbo (jenkins api)
+- pufferfish (jenkins api)
 - send any other wanted server types as an issue on this repo (or write it yourself and make a pull request)
 
 award-winner for the shiddiest download platform:  
-forge - adfocus links, hate it and plus the maven is locked. will not support ever
+forge - no api, hate it and plus the maven is locked. ~~will not support ever~~
 
 > jar options are based on what is available on serverjars.com but getjar is designed to operate without a middleman website or api, unlike serverjars.com
 
