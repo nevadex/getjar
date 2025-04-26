@@ -80,6 +80,14 @@ https://github.com/nevadex/getjar/`,
 		}
 		return nil
 	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if PRINT_VERSION {
+			fmt.Println("1.1.0")
+			return nil
+		} else {
+			return cmd.Help()
+		}
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -92,6 +100,8 @@ func Execute() {
 }
 
 var (
+	PRINT_VERSION bool
+
 	VERSION  string
 	FILENAME string
 
@@ -142,4 +152,6 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&LIST_VERSIONS, "list", "l", false, "Output a list of minecraft versions supported by a server")
 	rootCmd.PersistentFlags().BoolVarP(&QUIET, "quiet", "q", false, "Output nothing to stdout (sets stdout to nil)")
 	rootCmd.PersistentFlags().BoolVarP(&CHECKSUM, "checksum", "c", false, "Output the jar checksum if available")
+
+	rootCmd.Flags().BoolVarP(&PRINT_VERSION, "version", "v", false, "Output the version of this build of getjar")
 }
