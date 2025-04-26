@@ -13,6 +13,7 @@ const (
 	FOLIA     = 3
 	FORGE     = 11
 	MOHIST    = 7
+	NEOFORGE  = 12
 	PAPER     = 2
 	PURPUR    = 10
 	SPIGOT    = 4
@@ -42,12 +43,14 @@ func ServerJar(version string, filename string, serverType int) error {
 			jar, _, err = ops.DownloadMinecraftForge(version, "latest", false)
 		case MOHIST:
 			jar, _, err = ops.DownloadMohistMC(version, ops.ProjectMohist, 0)
+		case NEOFORGE:
+			jar, _, err = ops.DownloadNeoforged(version, "latest", false)
 		case PAPER:
 			jar, _, err = ops.DownloadPaperMC(version, ops.ProjectPaper, 0, false, false)
 		case PURPUR:
 			jar, _, err = ops.DownloadPurpurMC(version, "latest")
 		case VANILLA:
-			jar, _, err = ops.DownloadVanilla(version)
+			jar, _, err = ops.DownloadVanilla(version, false)
 		}
 
 		if err != nil {

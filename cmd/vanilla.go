@@ -19,7 +19,7 @@ Mojang AB, Microsoft Corporation, or one of its local affiliates
 EULA: https://aka.ms/MinecraftEULA`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ops.StartLog(VERBOSE, CHECKSUM)
-		jar, fver, err := ops.DownloadVanilla(VERSION)
+		jar, fver, err := ops.DownloadVanilla(VERSION, VANILLA_SNAPSHOT)
 		if err != nil {
 			return err
 		}
@@ -41,4 +41,5 @@ EULA: https://aka.ms/MinecraftEULA`,
 
 func init() {
 	rootCmd.AddCommand(vanillaCmd)
+	vanillaCmd.Flags().BoolVarP(&VANILLA_SNAPSHOT, "snapshot", "e", false, "Download latest snapshot version instead of latest release")
 }

@@ -11,7 +11,15 @@ why did I make this? mcjarfinder was feeling limited and it was getting annoying
 
 if go is installed: `go install github.com/nevadex/getjar@latest`
 
-if not: download binaries from the "Releases" page
+if not: download binary from the "Releases" page and add to path
+
+## usage:
+
+`getjar [type] [flags]`
+
+eg. `getjar vanilla -v 1.13.2 -f aquarium.jar`
+
+use `getjar -h` or `getjar [type] -h` for more options
 
 ---
 
@@ -21,7 +29,7 @@ if not: download binaries from the "Releases" page
 - download supported version lists directly
 - select specific builds/internal versions
 - access a wide range of popular server options
-- available as a library for other applications (github.com/nevadex/getjar/getjarlib)
+- available as a library for other applications (github.com/nevadex/getjar/getjarlib or github.com/nevadex/getjar/ops for more options)
 
 ---
 
@@ -29,30 +37,27 @@ if not: download binaries from the "Releases" page
 
 - **vanilla** (version_manifest)
 - **spigot** (spigotmc buildtools)
-- **craftbukkit** (spigotmc buildtools)
-- **paper** (papermc downloads api)
-- **folia** (papermc downloads api)
-- **mohist** (mohistmc downloads api)
-- **banner** (mohistmc downloads api)
-- **fabric** (meta api)
+- **bukkit** (spigotmc buildtools)
+- **paper** (papermc api)
+- **folia** (papermc api)
+- **mohist** (mohistmc api)
+- **banner** (mohistmc api)
+- **fabric** (fabric meta api)
 - **catserver** (jenkins api)
-- **purpur** (downloads api)
-- **forge** (html parsing)
+- **purpur** (purpurmc api)
+- **forge** (html parsing, later replace with maven)
+- **neoforge** (maven)
 
 
 ### in development:
 
-- neoforge (maven api)
 - magma (magmafoundation downloads api)
 - sponge (spongepowered downloads api)
 - limbo (jenkins api)
 - pufferfish (jenkins api)
 - send any other wanted server types as an issue on this repo (or write it yourself and make a pull request)
 
-award-winner for the shiddiest download platform:  
-forge - no api, hate it and plus the maven is locked. ~~will not support ever~~
-
-> jar options are based on what is available on serverjars.com but getjar is designed to operate without a middleman website or api, unlike serverjars.com
+> jar options are based on what ~~is~~ was available on serverjars.com but getjar is designed to operate without a middleman website or api, unlike serverjars.com
 
 ---
 

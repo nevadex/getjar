@@ -5,9 +5,10 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"slices"
 )
 
-func DownloadVanilla(version string) ([]byte, string, error) {
+func DownloadVanilla(version string, snapshot bool) ([]byte, string, error) {
 	log("attempting to download vanilla", version)
 
 	slog("downloading version manifest")
@@ -26,7 +27,11 @@ func DownloadVanilla(version string) ([]byte, string, error) {
 	log("decoded version_manifest.json")
 
 	if version == "" || version == "latest" {
-		version = versionManifest["latest"].(map[string]interface{})["release"].(string)
+		if snapshot {
+			version = versionManifest["latest"].(map[string]interface{})["snapshot"].(string)
+		} else {
+			version = versionManifest["latest"].(map[string]interface{})["release"].(string)
+		}
 		log("no version supplied, defaulting to latest:", version)
 	}
 
@@ -109,5 +114,6 @@ func GetVersionListVanilla() ([]string, error) {
 	for i := range versionList {
 		list = append(list, versionList[i].(map[string]interface{})["id"].(string))
 	}
+	slices.Reverse(list)
 	return list, nil
 }

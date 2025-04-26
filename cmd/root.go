@@ -45,6 +45,8 @@ https://github.com/nevadex/getjar/`,
 				versionList, err = ops.GetVersionListMinecraftForge()
 			case mohistCmd:
 				versionList, err = ops.GetVersionListMohistMC(ops.ProjectMohist)
+			case neoforgeCmd:
+				versionList, err = ops.GetVersionListNeoforged()
 			case paperCmd:
 				versionList, err = ops.GetVersionListPaperMC(ops.ProjectPaper)
 			case purpurCmd:
@@ -115,6 +117,11 @@ var (
 
 	FORGE_FORGE_VERSION string
 	FORGE_EXPERIMENTAL  bool
+
+	NEOFORGED_NEO_VERSION  string
+	NEOFORGED_EXPERIMENTAL bool
+
+	VANILLA_SNAPSHOT bool
 )
 
 func init() {

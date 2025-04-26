@@ -48,6 +48,7 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 		}
 	}
 
+stupidAF:
 	slog("downloading build list")
 	var buildListRaw map[string]interface{}
 	resp, err = http.Get("https://mohistmc.com/api/v2/projects/" + projectId + "/" + version + "/builds/")
@@ -63,20 +64,43 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 	buildList := buildListRaw["builds"].([]interface{})
 	log("decoded build list json")
 
+	// mohist sometimes puts a version up but makes no builds for it, address that here (STUPID)
+	if len(buildList) == 0 {
+		log("no builds available for version", version)
+		versionList = versionList[:len(versionList)-1]
+		version = versionList[len(versionList)-1].(string)
+		log("trying again with version", version)
+		goto stupidAF
+	}
+
+	// mohistmc alternates between "number" integer ids and "id" sha1 from git (HORRIBLE POS)
+	realBuildIdentifier := ""
 	if buildId == 0 {
 		for i := range buildList {
-			buildId = buildList[i].(map[string]interface{})["number"].(float64)
-		}
-	}
-	log("using build id", buildId)
+			supposedBuildNumber := buildList[i].(map[string]interface{})["number"]
+			if supposedBuildNumber != nil {
+				realBuildIdentifier = strconv.FormatFloat(supposedBuildNumber.(float64), 'f', -1, 64)
+				continue
+			}
 
-	slog("downloading build", buildId)
+			supposedBuildId := buildList[i].(map[string]interface{})["id"]
+			if supposedBuildId != nil {
+				realBuildIdentifier = supposedBuildId.(string)
+				continue
+			}
+		}
+	} else {
+		realBuildIdentifier = strconv.FormatFloat(buildId, 'f', -1, 64)
+	}
+	log("using build id", realBuildIdentifier)
+
+	slog("downloading build", realBuildIdentifier)
 	var buildRaw map[string]interface{}
-	resp, err = http.Get("https://mohistmc.com/api/v2/projects/" + projectId + "/" + version + "/builds/" + strconv.FormatFloat(buildId, 'f', -1, 64))
+	resp, err = http.Get("https://mohistmc.com/api/v2/projects/" + projectId + "/" + version + "/builds/" + realBuildIdentifier)
 	if err != nil {
 		return nil, "", err
 	}
-	log("retrieved build", buildId, "json")
+	log("retrieved build", realBuildIdentifier, "json")
 	defer func() { _ = resp.Body.Close() }()
 
 	if err = json.NewDecoder(resp.Body).Decode(&buildRaw); err != nil {
@@ -85,6 +109,7 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 	downloads := buildRaw["build"].(map[string]interface{})
 	jarUrl := downloads["originUrl"].(string)
 	jarMd5 := downloads["fileMd5"].(string)
+	jarSha256 := downloads["fileSha256"].(string)
 	log("decoded build json")
 
 	slog("downloading server jar")
@@ -101,6 +126,7 @@ func DownloadMohistMC(version string, projectId string, buildId float64) ([]byte
 	//log("minecraft version number:", version)
 	if printChecksum {
 		post("md5 checksum:", jarMd5)
+		post("sha256 checksum:", jarSha256)
 	}
 
 	return jar, version, nil
