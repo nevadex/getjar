@@ -16,7 +16,8 @@ var rootCmd = &cobra.Command{
 Uses official channels from development teams to acquire files
 No middleman API is used!
 
-https://github.com/nevadex/getjar/`,
+https://github.com/nevadex/getjar/
+Current version: 1.1.0`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },

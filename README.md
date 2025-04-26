@@ -29,7 +29,7 @@ use `getjar -h` or `getjar [type] -h` for more options
 - download supported version lists directly
 - select specific builds/internal versions
 - access a wide range of popular server options
-- available as a library for other applications (github.com/nevadex/getjar/getjarlib or github.com/nevadex/getjar/ops for more options)
+- available as a library for other applications (github.com/nevadex/getjar/ops)
 
 ---
 
